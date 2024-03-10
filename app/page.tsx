@@ -9,54 +9,73 @@ import { BiSolidLock } from "react-icons/bi";
 import Link from "next/link";
 import { error, log } from "console";
 
-export const linkShearing = createContext<ContextStyle | undefined>(undefined);
+// export const linkShearing = createContext<ContextStyle | undefined>(undefined);
 
-function Home() {
-  const [acc, setAcc] = useState<AccStyle[]>([
-    {
-      Email: "",
-      password: "",
-      firstName: "",
-      lastName: "",
-      links: [],
-    },
-  ]);
-  // useEffect(() => {
-  //   setAcc([
-  //     ...acc,
-  //     {
-  //       Email: "",
-  //       password: "",
-  //       firstName: "",
-  //       lastName: "",
-  //       links: [],
-  //     },
-  //   ]);
-  //   console.log(acc + "  bla");
+// export function context():any{
+  // const [acc, setAcc] = useState<AccStyle[]>([
+  //   {
+  //     id:1,
+  //     Email: "",
+  //     password: "",
+  //     firstName: "",
+  //     lastName: "",
+  //     links: [],
+  //   },
+  // ]);
 
-  // }, []);
+//   const [noneExAcc, setNoneExAcc] = useState<boolean>(false);
 
-  const [noneExAcc, setNoneExAcc] = useState<boolean>(false);
-  // console.log(acc + "  bla");
-  return (
-    <linkShearing.Provider
-      value={{
-        acc,
-        setAcc,
-        noneExAcc,
-        setNoneExAcc,
-      }}
-    >
-      <LoginContext />
-    </linkShearing.Provider>
-  );
-}
+//   return{
+//     props:{
+//       acc:acc
+//       // setAcc,
+//       // noneExAcc,
+//       // setNoneExAcc
+//     }
+//   }
+// }
+
+// function Home() {
+
+//   const linkShearing = createContext<any>(null)
+
+//   // useEffect(() => {
+//   //   setAcc([
+//   //     ...acc,
+//   //     {
+//   //       Email: "",
+//   //       password: "",
+//   //       firstName: "",
+//   //       lastName: "",
+//   //       links: [],
+//   //     },
+//   //   ]);
+//   //   console.log(acc + "  bla");
+
+//   // }, []);
+
+//   //console.log(acc + "  bla");
+//   return (
+//     <linkShearing.Provider
+//       // value={{
+//       //   acc,
+//       //   setAcc,
+//       //   noneExAcc,
+//       //   setNoneExAcc,
+//       // }}
+//     >
+//       <LoginContext />
+//      </linkShearing.Provider>
+//   );
+ //}
 
 export default function LoginContext() {
-  const context = useContext(linkShearing);
+  // const context = useContext(linkShearing);
+  // console.log(context().acc)
 
   const [acc, setAcc] = useState<AccStyle[]>([
     {
+      id: 1,
       Email: "",
       password: "",
       firstName: "",
@@ -64,6 +83,18 @@ export default function LoginContext() {
       links: [],
     },
   ]);
+
+  const [noneExAcc, setNoneExAcc] = useState<boolean>(false);
+
+  // const [acc, setAcc] = useState<AccStyle[]>([
+  //   {
+  //     Email: "",
+  //     password: "",
+  //     firstName: "",
+  //     lastName: "",
+  //     links: [],
+  //   },
+  // ]);
 
   // useEffect(() => {
   //   context?.setAcc([
@@ -76,7 +107,7 @@ export default function LoginContext() {
   //       links: [],
   //     },
   //   ]);
-    console.log(acc[0] + "  bla");
+  // console.log(context?.acc[0].Email + "  bla");
 
   // }, []);
 
@@ -84,27 +115,27 @@ export default function LoginContext() {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm<Logininputs>();
 
   const Submit: SubmitHandler<Logininputs> = (data: Logininputs) => {
     // console.log(errors)
-    console.log(data);
-    let findAcc = "jn";
-    console.log(context?.acc);
+    // console.log(data);
+    // let findAcc = "jn";
+    // console.log(context?.acc);
     acc.some((item) => {
       if (item.Email == data.Email && item.password == data.password) {
         return true;
+        console.log(true);
       }
-      context?.setNoneExAcc(true);
-      console.log(item.Email);
-      console.log(context?.noneExAcc);
-      
+      console.log(acc);
+      setNoneExAcc(true);
+      // console.log(item.Email);
+      // console.log(context?.noneExAcc);
     });
-    console.log("jkn");
+    // console.log("jkn");
   };
 
-  console.log(errors);
+  // console.log(errors);
   // console.log(watch);
 
   return (
@@ -128,7 +159,7 @@ export default function LoginContext() {
             <div className=" flex flex-col gap-[4px] ">
               <h2
                 className={` text-[12px] ${
-                  errors.Email || context?.noneExAcc
+                  errors.Email || noneExAcc
                     ? "text-[#ff3939]"
                     : "text-[#333333]"
                 } `}
@@ -137,7 +168,7 @@ export default function LoginContext() {
               </h2>
               <div
                 className={` flex items-center justify-between gap-[13.5px] w-[100%] px-[16px] py-[12px] rounded-[8px] border border-solid ${
-                  errors.Email || context?.noneExAcc
+                  errors.Email || noneExAcc
                     ? "border-[#ff3939]"
                     : "border-[#d9d9d9]"
                 } `}
@@ -174,7 +205,7 @@ export default function LoginContext() {
             <div className=" flex flex-col gap-[4px] ">
               <h2
                 className={`text-[12px] ${
-                  errors.password || context?.noneExAcc
+                  errors.password || noneExAcc
                     ? "text-[#ff3939]"
                     : "text-[#333333]"
                 } `}
@@ -183,7 +214,7 @@ export default function LoginContext() {
               </h2>
               <div
                 className={` flex items-center justify-between  w-[100%] px-[16px] py-[12px] rounded-[8px] border border-solid ${
-                  errors.password || context?.noneExAcc
+                  errors.password || noneExAcc
                     ? "border-[#ff3939]"
                     : "border-[#d9d9d9]"
                 } `}
@@ -217,7 +248,12 @@ export default function LoginContext() {
             <p className="text-[16px] text-[#737373] text-center ">
               Don’t have an account?
               <br />
-              <Link href={"/signup"} className="text-[#633cff]">
+              <Link
+                href={{
+                  pathname: "/123",
+                }}
+                className="text-[#633cff]"
+              >
                 Create account
               </Link>
             </p>

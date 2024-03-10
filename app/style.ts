@@ -5,8 +5,8 @@ export interface Logininputs {
 }
 
 export interface ContextStyle{
-    acc:AccStyle
-    setAcc:(Login:AccStyle) =>  void,
+    acc:AccStyle[]
+    setAcc:(Login:AccStyle[]) =>  void,
     noneExAcc:boolean,
     setNoneExAcc:(noneExAcc:boolean) => void
 }
@@ -19,6 +19,7 @@ interface links{
 }
 
 export interface AccStyle extends Logininputs {
+    id:number
     firstName:string
     lastName:string
     links:links[]
