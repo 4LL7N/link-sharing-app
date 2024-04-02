@@ -37,13 +37,14 @@ export default function LoginContext() {
   useEffect(() => {
     localStorage.setItem("acc", JSON.stringify(acc));
   }, []);
-  if (localStorage && localStorage.getItem("acc")) {
+
+  // if (localStorage && localStorage.getItem("acc")) {
     useEffect(() => {
       let accArr: any = localStorage.getItem("acc");
       accArr ? (accArr = JSON.parse(accArr)) : null;
       accArr ? setAcc(accArr) : null;
     }, [localStorage.getItem("acc")]);
-  }
+  // }
   //if(localStorage.getItem("acc")){
   // useEffect(() => {
   //   let newData:string|null = localStorage.getItem("acc")

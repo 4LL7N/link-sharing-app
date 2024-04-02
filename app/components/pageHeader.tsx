@@ -17,6 +17,7 @@ export default function PageHeader({
   
   
   
+  
 
   const [newParams,setNewParams] = useState<string>("links")
 
@@ -28,7 +29,7 @@ export default function PageHeader({
     <>
       <main className="bg-[#fafafa] min-h-[100vh] pb-[16px] md:pt-[24px] ">
         <header className="flex items-center justify-between py-[16px] pl-[24px] pr-[16px] bg-[#ffffff] rounded-b-[12px] md:rounded-[12px] md:mx-[24px] ">
-          <img className="w-[32px] h-[32px] md:w-[146px] " src={typeof window !== "undefined" && window.screen.availWidth >= 767?"/images/Group 252.png":`/images/logo.svg`} onClick={() => router.push(`/`) } />
+          <img className="w-[32px] h-[32px] md:w-[146px] " src={typeof window !== "undefined" && window.screen.availWidth < 768?`/images/logo.svg`:"/images/Group 252.png"} onClick={() => router.push(`/`) } />
           <div className="flex">
             <Link
               href={{ pathname: `/${params.profile}/links` }}

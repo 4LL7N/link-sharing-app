@@ -1,12 +1,11 @@
 "use client";
-import { InputHTMLAttributes, JSXElementConstructor, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import NoLink from "./noLinks";
 import { AccStyle, Links, links } from "../style";
 import { IoReorderTwoOutline } from "react-icons/io5";
-import dynamic from "next/dynamic";
 import Select from "react-select";
 import Urlinput, { Placeholder } from "./Urlinput";
-import Item from "antd/es/list/Item";
+import { FaArrowRight } from "react-icons/fa6";
 
 function AddLinks() {
   const Links: Links[] = [
@@ -88,6 +87,7 @@ function AddLinks() {
   const [accdata,setAccData] = useState<AccStyle[]>()
   const [UserAcc,setUserAcc] = useState<AccStyle>()
   
+  const [fiveArr,setFiveArr] = useState<Links[]>()
 
   useEffect(() => {
     let accArr: any = localStorage.getItem("acc");
@@ -97,7 +97,13 @@ function AddLinks() {
     const User = accArr?.find((item: AccStyle) => item.id == id);
     setUserAcc(User)
     setLinksHave(User.links);
-    
+    let newarr = []
+    for(let i=0 ; i<5 ; i++){
+      if(User.links[i])newarr.push(User.links[i])
+    }
+
+    setFiveArr([...newarr])
+
   }, []);
 
   const saveData = () => {
@@ -105,7 +111,12 @@ function AddLinks() {
     let accArr:any = accdata?.filter((item:AccStyle) => item.id != id )
     let newUserData:AccStyle = {id:UserAcc?.id,Email:UserAcc?.Email,password:UserAcc?.password,firstName:UserAcc?.firstName,lastName:UserAcc?.lastName,links:[...LinksHave],picture:UserAcc?.picture}
     localStorage.setItem("acc",JSON.stringify([...accArr,newUserData]))
-    
+    let newarr = []
+    for(let i=0 ; i<5 ; i++){
+      if(LinksHave[i])newarr.push(LinksHave[i])
+    }
+
+    setFiveArr([...newarr])
   }
 
   function Remove(index:number) {
@@ -119,14 +130,37 @@ function AddLinks() {
     setLinksHave(newArr)
   }
 
-  
 
   return (
     <>
-      <div className="flex flex-col lg:flex-row w-[100%] min-h-[100%] md:min-h-screen rounded-t-[12px] p-[24px] md:p-[40px] bg-[#ffffff] ">
-        <div className="hidden lg:block bg-[#ffffff] w-[560px] h-[100%] " >
+    <main className="flex md:gap-[24px] " >
+     <div className="hidden lg:flex bg-[#ffffff] w-[560px] h-[100vh] rounded-[12px] justify-center items-center relative " >
           <img src="/images/preview-section.svg" alt="" />
+          {
+            fiveArr?.map((item,index)=>{
+              
+              let color:string=item?.bg
+              
+              let position = 455.5  + (Number(index)*63)
+              return(
+                <>
+                  <div key={index} className={` w-[237px] h-[43px] px-[16px] py-[11px] absolute top-[${position}px] rounded-[8px] flex justify-between `} 
+                    style={{background:color,
+                    top:`${position}px`}}
+                  >
+                    <div className="flex gap-[10px]" >
+                    <img src={item?.image} alt="" />
+                    <p className={`text-[16px]  ${item?.name == "Frontend Mentor" ? "text-[#333333] ":"text-[#ffffff]"} `}>{item?.name}</p>
+                    </div>
+                    <FaArrowRight color={item?.name == "Frontend Mentor" ?"#333333":"#ffffff"} />
+                  </div>
+                </>
+              )
+            })
+          }
         </div>
+        <div className=" bg-transparent w-[100%] " >
+      <div className="flex flex-col  w-[100%] lg:w-[880px] min-h-[100%] md:min-h-screen rounded-t-[12px] p-[24px] md:p-[40px] bg-[#ffffff] ">
         <h1 className="text-[24px] md:text-[32px] font-bold text-[#333333] mb-[8px]">
           Customize your links
         </h1>
@@ -149,7 +183,7 @@ function AddLinks() {
         {!LinksHave ? (
           <NoLink />
         ) : (
-          <div className="flex flex-col gap-[24px] " >
+          <div className="flex flex-col gap-[24px] mb-[24px] md:mb-[24px] " >
           {LinksHave.map((item, index) => {
             
 
@@ -159,13 +193,12 @@ function AddLinks() {
                findlink?.image? item.image = findlink?.image:null
                findlink?.bg ? item.bg = findlink?.bg:null
 
-              //  setLinksHave([...LinksHave,{}])
-              console.log(LinksHave)
+              
               }
 
             return (
               <>
-                <div className="p-[20px] bg-[#fafafa] rounded-[12px] flex flex-col gap-[12px] ">
+                <div key={index} className="p-[20px] bg-[#fafafa] rounded-[12px] flex flex-col gap-[12px] ">
                   <div className="flex justify-between ">
                     <h1 className=" text-[16px] text-[#737373] font-bold flex items-center gap-[8px] ">
                       <IoReorderTwoOutline color="#737373" />
@@ -241,6 +274,8 @@ function AddLinks() {
           <p className="text-[16px] text-[#ffffff] font-semibold ">Save</p>
         </button>
       </div>
+      </div>
+      </main>
     </>
   );
 }

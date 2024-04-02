@@ -21,8 +21,8 @@ function Profilepage() {
 
   return (
     <>
-      <main>
-        <div className="md:bg-[#633cff] md:h-[357px] md:w-[100%] md:px-[24px] md:pt-[24px] " >
+      <main className="mb-[207px] min-h-[100vh]" >
+        <div className="md:bg-[#633cff] md:h-[357px] md:w-[100%] md:px-[24px] md:pt-[24px] md:rounded-b-[32px] " >
         <div className=" flex justify-between px-[24px] py-[16px] md:bg-[#ffffff] md:rounded-[12px] ">
           <Link href={{pathname:`/${UserAcc?.id}/links`}} className=" flex items-center justify-center py-[11px] w-[159.5px] border border-solid border-[#633cff] rounded-[8px] ">
             <p className="text-[16px] text-[#633cff] font-semibold ">
