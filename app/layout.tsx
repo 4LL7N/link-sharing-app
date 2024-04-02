@@ -6,7 +6,7 @@ import "./globals.css";
 import { useContext, useState } from "react";
 import { create } from "zustand";
 import { set } from "react-hook-form";
-
+import {Provider} from "react-redux"
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,18 +24,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const [linkProfile,setLinkProfile] = useState(false)
+  
 
-  const useBearStore = create((set) => ({
-    linkProfile:linkProfile,
-    setLinkProfile:setLinkProfile
-  }))
+  
+  
+  // const useBearStore = create((set) => ({
+  //   linkProfile:linkProfile,
+  //   setLinkProfile:setLinkProfile
+  // }))
 
   // console.log(useBearStore((set) => set))
 
   return (
     <html lang="en">     
-      <body className={inter.className}>{children }</body>
+      
+          <body className={inter.className}>{children }</body>
+    
     </html>
   );
 }

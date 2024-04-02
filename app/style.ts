@@ -1,7 +1,7 @@
 
 export interface Logininputs {
-    Email:string
-    password:string
+    Email:string|undefined
+    password:string|undefined
 }
 
 export interface ContextStyle{
@@ -11,7 +11,7 @@ export interface ContextStyle{
     setNoneExAcc:(noneExAcc:boolean) => void
 }
 
-interface links{
+export interface links{
     name:string
     image:string
     url:string
@@ -19,8 +19,25 @@ interface links{
 }
 
 export interface AccStyle extends Logininputs {
-    id:number
-    firstName:string
-    lastName:string
-    links:links[]
+    id:number|undefined
+    firstName:string|undefined
+    lastName:string|undefined
+    links:any,
+    picture:string|undefined
+}
+
+export interface Links {
+    name:string,
+    image:string
+    bg:string
+
+}
+
+export interface User {
+    id: number;
+    Email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    links: any[];
 }
