@@ -26,7 +26,8 @@ export default function ProfileLayout({
 
     return ( 
     <>
-    <PageHeader children={children} />
+    <PageHeader />
+    <section className=" min-h-screen  bg-[#fafafa] px-[24px] md:pt-[24px] ">{children}</section>
     </>
     )
   }

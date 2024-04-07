@@ -159,8 +159,8 @@ function AddLinks() {
             })
           }
         </div>
-        <div className=" bg-transparent w-[100%] " >
-      <div className="flex flex-col  w-[100%] lg:w-[880px] min-h-[100%] md:min-h-screen rounded-t-[12px] p-[24px] md:p-[40px] bg-[#ffffff] ">
+        <div className=" bg-transparent w-[100%]  overflow-hidden " >
+      <div className="flex flex-col  w-[100%]  min-h-[100%] md:min-h-screen rounded-t-[12px] p-[24px] md:p-[40px] bg-[#ffffff] ">
         <h1 className="text-[24px] md:text-[32px] font-bold text-[#333333] mb-[8px]">
           Customize your links
         </h1>
@@ -269,7 +269,7 @@ function AddLinks() {
           </div>
         )}
       </div>
-      <div className=" p-[16px] border-t border-t-solid border-t-[#d9d9d9] bg-[#ffffff] rounded-b-[12px] md:px-[40px] md:py-[24px] md:flex md:justify-end ">
+      <div className="w-[100%] p-[16px] border-t border-t-solid border-t-[#d9d9d9] bg-[#ffffff] rounded-b-[12px] md:px-[40px] md:py-[24px] md:flex md:justify-end ">
         <button className="rounded-[12px] bg-[#633cff] hover:opacity-50 w-[100%] md:w-auto flex justify-center py-[11px] md:px-[27px] " onClick={saveData} >
           <p className="text-[16px] text-[#ffffff] font-semibold ">Save</p>
         </button>

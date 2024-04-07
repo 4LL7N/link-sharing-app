@@ -6,11 +6,7 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function PageHeader({
-  children,
-}: {
-  children: React.ReactNode;
-}){
+export default function PageHeader(){
 
   const router = useRouter()
   const params = useParams();
@@ -27,7 +23,7 @@ export default function PageHeader({
 
   return (
     <>
-      <main className="bg-[#fafafa] min-h-[100vh] pb-[16px] md:pt-[24px] ">
+      <main className="bg-[#fafafa]  pb-[16px] md:pt-[24px] ">
         <header className="flex items-center justify-between py-[16px] pl-[24px] pr-[16px] bg-[#ffffff] rounded-b-[12px] md:rounded-[12px] md:mx-[24px] ">
           <img className="w-[32px] h-[32px] md:w-[146px] " src={typeof window !== "undefined" && window.screen.availWidth < 768?`/images/logo.svg`:"/images/Group 252.png"} onClick={() => router.push(`/`) } />
           <div className="flex">
@@ -68,7 +64,7 @@ export default function PageHeader({
             </Link>
           </IconContext.Provider>
         </header>
-        <section className=" m-[16px] md:m-[24px] min-h-screen ">{children}</section>
+        
       </main>
     </>
   );
