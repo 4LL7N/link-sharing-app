@@ -33,18 +33,25 @@ export default function LoginContext() {
   ]);
 
   const [noneExAcc, setNoneExAcc] = useState<boolean>(false);
+  let accData:any;
 
+  
   useEffect(() => {
     localStorage.setItem("acc", JSON.stringify(acc));
   }, []);
-
-  // if (localStorage && localStorage.getItem("acc")) {
+  // console.log(typeof localStorage);
+  
+  if (typeof localStorage !== 'undefined') {
+    accData = localStorage.getItem("acc");
+  
+  }
+  if (localStorage && localStorage.getItem("acc")) {
     useEffect(() => {
-      let accArr: any = localStorage.getItem("acc");
+      let accArr: any = localStorage.getItem("acc")?localStorage.getItem("acc"):null;
       accArr ? (accArr = JSON.parse(accArr)) : null;
       accArr ? setAcc(accArr) : null;
-    }, [localStorage.getItem("acc")]);
-  // }
+    }, [accData]);
+  }
   //if(localStorage.getItem("acc")){
   // useEffect(() => {
   //   let newData:string|null = localStorage.getItem("acc")
