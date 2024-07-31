@@ -26,8 +26,10 @@ export default function ProfileLayout({
 
     return ( 
     <>
-    <PageHeader />
-    <section className=" min-h-screen  bg-[#fafafa] px-[24px] md:pt-[24px] ">{children}</section>
+    <main className="h-[100vh] flex flex-col  " >
+      <PageHeader />
+      <section className=" bg-[#fafafa] md:px-[24px] md:py-[24px] flex flex-1 ">{children}</section>
+    </main>
     </>
     )
   }

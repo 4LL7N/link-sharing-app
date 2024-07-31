@@ -5,6 +5,9 @@ import { IconContext } from "react-icons";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import logo from '../../public/images/logo.svg'
+import image from "../../public/images/Group 252.png"
 
 export default function PageHeader(){
 
@@ -21,11 +24,23 @@ export default function PageHeader(){
     if(typeof params.profile == "string")localStorage.setItem("accId",params.profile)
   },[])
 
+  let src:boolean = true
+  if(typeof window != "undefined"){
+   src = window.screen.width < 768
+  }
+  
   return (
     <>
       <main className="bg-[#fafafa]  pb-[16px] md:pt-[24px] ">
         <header className="flex items-center justify-between py-[16px] pl-[24px] pr-[16px] bg-[#ffffff] rounded-b-[12px] md:rounded-[12px] md:mx-[24px] ">
-          <img className="w-[32px] h-[32px] md:w-[146px] " src={typeof window !== "undefined" && window.screen.availWidth < 768?`/images/logo.svg`:"/images/Group 252.png"} onClick={() => router.push(`/`) } />
+          <div className="w-[32px] h-[32px] md:w-[146px] relative" >
+          {src?
+          <Image src={logo} onClick={() => router.push(`/`) } fill alt="" />
+          :
+          <Image src={image} onClick={() => router.push(`/`) } fill alt="" />
+          // null
+          }
+          </div>
           <div className="flex">
             <Link
               href={{ pathname: `/${params.profile}/links` }}
@@ -34,11 +49,13 @@ export default function PageHeader(){
               } rounded-[8px] md:py-[11px] md:px-[27px] md:gap-[8px] `}
               onClick={()=> setNewParams("links")}
             >
-              <img
-                className="w-[25px] h-[25px] "
+              <div className="w-[25px] h-[25px]  relative" >
+              <Image
+                fill
                 src={newParams != "links" ? "/images/links-off.png" : `/images/links.png`}
                 alt=""
               />
+              </div>
               <p className={` hidden md:block md:text-[16px] ${ newParams != "links"?"md:text-[#737373]": "md:text-[#633cff]"} md:font-semibold  `} >Links</p>
             </Link>
             <Link

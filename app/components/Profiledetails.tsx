@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { IoImageOutline } from "react-icons/io5";
 import { AccStyle, Links } from "../style";
 import { FaArrowRight } from "react-icons/fa6";
+import Image from "next/image";
 
 
 function Profiledetails() {
@@ -40,35 +41,52 @@ function Profiledetails() {
 
   return (
     <>
-    <main className="flex md:gap-[24px] " >
-      <div className="hidden lg:flex bg-[#ffffff] w-[560px] h-[100vh] rounded-[12px] justify-center items-center relative " >
-          <img src="/images/preview-section.svg" alt="" />
-          {
-            fiveArr?.map((item,index)=>{
-              
-              let color:string=item?.bg
-              console.log(index);
-              let position = 455.5  + (Number(index)*63)
-              console.log(position,index)
-              return(
-                <>
-                  <div className={` w-[237px] h-[43px] px-[16px] py-[11px] absolute top-[${position}px] rounded-[8px] flex justify-between `} 
-                    style={{background:color,
-                    top:`${position}px`}}
-                  >
-                    <div className="flex gap-[10px]" >
-                    <img src={item?.image} alt="" />
-                    <p className={`text-[16px]  ${item?.name == "Frontend Mentor" ? "text-[#333333] ":"text-[#ffffff]"} `}>{item?.name}</p>
-                    </div>
-                    <FaArrowRight color={item?.name == "Frontend Mentor" ?"#333333":"#ffffff"} />
+    <main className="flex justify-center w-[100%] lg:flex-1 lg:gap-[24px] " >
+    <div className="hidden lg:flex bg-[#ffffff] w-[560px] h-auto pt-[101.5px] rounded-[12px] justify-center relative ">
+          <div className="w-[307px] h-[631px] overflow-hidden relative " >
+          <Image
+            src="/images/preview-section.svg"
+            alt=""
+            fill
+          />
+          </div>
+
+          {fiveArr?.map((item, index) => {
+            let color: string = item?.bg;
+
+            let position = 378 + Number(index) * 64;
+            return (
+              <>
+                <div
+                  key={index*Math.random()}
+                  className={` w-[237px] h-[44px] px-[16px] py-[11px] absolute  rounded-[8px] flex justify-between `}
+                  style={{ background: color, top: `${position}px` }}
+                >
+                  <div className="flex gap-[10px]">
+                    <Image src={item?.image} alt="" width={20} height={20} />
+                    <p
+                      className={`text-[16px]  ${
+                        item?.name == "Frontend Mentor"
+                          ? "text-[#333333] "
+                          : "text-[#ffffff]"
+                      } `}
+                    >
+                      {item?.name}
+                    </p>
                   </div>
-                </>
-              )
-            })
-          }
+                  <FaArrowRight
+                    color={
+                      item?.name == "Frontend Mentor" ? "#333333" : "#ffffff"
+                    }
+                  />
+                </div>
+              </>
+            );
+          })}
         </div>
-        <div className=" bg-transparent w-[808px] " >
-      <div className="flex flex-col w-[100%] min-h-[100%] md:min-h-[100vh] rounded-t-[12px] p-[24px] md:p-[40px] bg-[#ffffff] ">
+        <div className=" bg-transparent  flex flex-col md:w-[808px] w-[343px] " >
+           
+      <div className="flex flex-1 flex-col w-[100%]  rounded-t-[12px] p-[24px] md:p-[40px] bg-[#ffffff] ">
         <h1 className="text-[24px] md:text-[32px] font-bold text-[#333333] mb-[8px]">
           Profile Details
         </h1>

@@ -6,10 +6,6 @@ export default function profile(){
     
 
     return(<>
-        
-            <AddLinks/>
-            
-        
-        
+        <AddLinks/>
     </>)
 }
